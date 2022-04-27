@@ -15,12 +15,14 @@
             
             $player1 = $_POST['player1'];
             $player2 = $_POST['player2'];
+            $player1token = $_POST['playe1token'];
+            $player2token = $_POST['player2token'];
             
-            $com_string = 'CALL procInsertGame($1, $2, NULL)';
+            $com_string = 'CALL procInsertRound(funcGameID($1, $2), $3, $4, NULL)';
             
             // calling the procedure to insert player. 
             // See documentation at: https://www.php.net/manual/en/function.pg-query-params
-			$result = pg_query_params($db_connection, $com_string, array($player1, $player2))
+			$result = pg_query_params($db_connection, $com_string, array($player1, $player2, $player1token, $player2token))
 				or die('Unable to CALL stored procedure: ' . pg_last_error());
 
             // get the output parameter
@@ -31,27 +33,23 @@
             // Parse the output:
             if ($errLvl == '0')
             {
-                $outPut = 'The player ' . $player1 . ' and the player '. $player2 . ' was successfully inserted.';
+                $outPut = 'The player ' . $player1 . ' was successfully inserted.';
             }
             elseif ($errLvl == '1')
             {
-                $outPut = 'player 1 was null';
+                $outPut = 'token was null';
             }
             elseif ($errLvl == '2')
             {
-                $outPut = 'player 2 was null';
+                $outPut = 'one of the things was not R P or S and was null or negative';
             }
             elseif ($errLvl == '3')
             {
-                $outPut = 'the player names were equal';
-            }
-            elseif ($errLvl == '4')
-            {
-                $outPut = 'one player has not been added to table players';
+                $outPut = 'One of the player names was null or negative';
             }
             else
             {
-                $outPut = 'game already exists';
+                $outPut = 'game doesnt exist';
             }
 
 			pg_close($db_connection);

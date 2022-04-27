@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-        <form action="/index.html">
+        <form action="form2.php" method="post">
             <div>
-            <textarea class="message" name="feedback"
-                    id="feedback" rows=1 cols=60 readonly="enabled">
-                Index 3 not yet implemented.
-            </textarea>
+                <label for="player1">Player ID</label>
+                <input type="text" name="player1" />
             </div>
-                <button type="submit">Return</button>
-        </form>        
+            <div>
+                <label for="player2">Player ID</label>
+                <input type="text" name="player2" />
+            </div>
+                <button type="submit">Submit</button>
+        </form>
 </html>

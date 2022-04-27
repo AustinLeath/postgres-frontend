@@ -1,12 +1,12 @@
 <?php
-    $host   = "host = 192.168.1.10";
+    $host   = "host = 127.0.0.1";
     // Our web server and database server are on the same machine; this wouldn't be
     // a good idea in a production setting.
     
     $port   = "port = 5432";
     $dbname = "dbname = rps";
     
-    $credentials = "user = postgres password=BlueSky";
+    $credentials = "user = somebody password=BlueSky";
     // Important: the user has *only* enough privileges to execute the routines
     // written for public users!
     
